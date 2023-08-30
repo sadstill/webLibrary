@@ -2,21 +2,32 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: #f1ebe6;
             color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
 
         h1 {
+            color: #1e3932;
             font-family: 'Roboto', sans-serif;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
         }
 
         .people {
-            display: flex;
-            flex-wrap: wrap;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px); /* Высота минус высота заголовка и кнопки */
         }
 
         .person {
@@ -26,24 +37,48 @@
             margin: 10px;
             width: 300px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: background 0.3s ease;
         }
 
         .name {
             font-size: 1.2em;
             font-family: 'Open Sans', sans-serif;
-            color: #0077cc;
+            color: #006241;
             text-decoration: none;
             font-weight: bold;
+            margin-top: 10px;
             display: block;
+            transition: color 0.3s ease;
         }
 
         .birthdate {
             font-style: italic;
-            color: #666;
+            color: #000000;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .person:hover {
+            background: #ddd;
+        }
+
+        .name:hover {
+            color: #000000;
+        }
+
+        .add-button-container {
+            width: 100%;
+            margin-top: 20px; /* Добавьте отступ сверху */
+            display: flex;
+            justify-content: center; /* Выравнивание кнопки по центру горизонтально */
         }
 
         .add-button {
-            background: linear-gradient(to bottom, #00aaff, #0077cc);
+            background: linear-gradient(to bottom, #0c9364, #006241);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             transition: all 0.2s;
             color: #fff;
@@ -58,50 +93,100 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
-        @keyframes slide {
-            from {
-                transform: translateX(-5px);
-            }
-
-            to {
-                transform: translateX(0);
-            }
+        .sort-buttons {
+            display: flex;
+            margin-top: 10px;
         }
 
-        .name:hover {
-            animation: slide 0.3s ease;
+        .sort-button {
+            background-color: #006241;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .sort-button:hover {
+            background-color: #004a30;
+        }
+
+        .edit-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #006241;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #004a30;
         }
     </style>
-
 </head>
-<body><h1>Список людей</h1>
+<body>
+<h1>СПИСОК ЛЮДЕЙ</h1>
+
 <div class="people">
-
     <div th:each="person : ${people}" class="person">
-
-        <a th:href="@{/people/{id}(id=${person.getId()})}" class="name">
+        <a th:href="@{/people/{id}(id=${person.getId()})}" class="name person-link">
             <span th:text="${person.getSurname()}"></span>
             <span th:text="${person.getName()}"></span>
             <span th:text="${person.getLastName()}"></span>
         </a>
-
         <span class="birthdate" th:text="${person.getBirthDate()}"></span>
-
+        <a th:href="@{/people/{id}/edit(id=${person.getId()})}" class="edit-button">Edit</a>
     </div>
-
 </div>
-<a href="/people/new" class="add-button">Добавить человека</a>
 
-<script> // script.js // Добавление интерактивности при наведении
-    const people = document.querySelectorAll('.person');
-    people.forEach(person => {
-        person.addEventListener('mouseover', () => {
-            person.style.background = '#ddd';
+<div class="sort-buttons">
+    <button id="sortByName" class="sort-button">Сортировать по имени</button>
+    <button id="sortByDate" class="sort-button">Сортировать по дате рождения</button>
+</div>
+
+<div class="add-button-container">
+    <a href="/people/new" class="add-button">Добавить человека</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const personBlocks = document.querySelectorAll('.person');
+
+        personBlocks.forEach(personBlock => {
+            personBlock.addEventListener('click', () => {
+                const link = personBlock.querySelector('.person-link');
+                if (link) {
+                    window.location.href = link.getAttribute('href');
+                }
+            });
         });
-        person.addEventListener('mouseout', () => {
-            person.style.background = '#f2f2f2';
+
+        const peopleContainer = document.querySelector('.people');
+        const people = Array.from(document.querySelectorAll('.person'));
+
+        const sortByNameButton = document.getElementById('sortByName');
+        const sortByDateButton = document.getElementById('sortByDate');
+
+        sortByNameButton.addEventListener('click', () => {
+            const sortedPeople = _.sortBy(people, person => person.querySelector('.name').textContent);
+            peopleContainer.innerHTML = '';
+            sortedPeople.forEach(person => peopleContainer.appendChild(person));
+        });
+
+        sortByDateButton.addEventListener('click', () => {
+            const sortedPeople = _.sortBy(people, person => person.querySelector('.birthdate').textContent);
+            peopleContainer.innerHTML = '';
+            sortedPeople.forEach(person => peopleContainer.appendChild(person));
         });
     });
 </script>
+
 </body>
 </html>

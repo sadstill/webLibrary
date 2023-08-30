@@ -2,25 +2,98 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update person</title>
+    <title>Update Person</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Общие стили для всех размеров экрана */
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background: #f1ebe6;
+            color: #333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-wrapper {
+            max-width: 500px;
+            width: 70%;
+            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1e3932;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        input,
+        button {
+            width: calc(100% - 27px); /* Учесть отступы */
+            padding: 12px;
+            border-radius: 6px;
+            border: 2px solid #ddd;
+            font-size: 16px;
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            background: #006241;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+            margin-left: 13px;
+        }
+
+        button:hover {
+            background: #004a30;
+            transform: scale(1.1); /* Увеличение кнопки при наведении */
+            transition: background 0.3s ease, transform 0.3s ease; /* Плавные переходы */
+        }
+
+    </style>
 </head>
 <body>
+<div class="form-wrapper">
+    <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+        <h1>РЕДАКТИРОВАНИЕ ЧЕЛОВЕКА</h1>
+        <label for="name">Изменение имени:</label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <label for="surname">Изменение фамилии:</label>
+        <input type="text" th:field="*{surname}" id="surname"/>
+        <label for="lastName">Изменение отчества:</label>
+        <input type="text" th:field="*{lastName}" id="lastName"/>
+        <label for="birthDate">Изменение даты рождения:</label>
+        <input type="date" th:field="*{birthDate}" id="birthDate"/>
+        <button type="submit">Обновить</button>
+    </form>
+</div>
 
-<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <div style="color:#34ff00" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
-    <br/>
-    <label for="age">Enter age: </label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div>
-    <br/>
-    <label for="email">Enter email: </label>
-    <input type="text" th:field="*{email}" id="email"/>
-    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
-    <br/>
-    <input type="submit" value="Update!"/>
-</form>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const button = document.querySelector("button");
+
+        // Пример: при клике на кнопку, выводить сообщение в консоль
+        button.addEventListener("click", function() {
+            console.log("Кнопка была нажата!");
+        });
+    });
+</script>
 
 </body>
 </html>

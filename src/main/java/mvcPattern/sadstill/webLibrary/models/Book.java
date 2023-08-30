@@ -16,5 +16,5 @@ public class Book {
 
     private String author;
 
-    private LocalDate birthDate;
+    private int birthDate;
 }
