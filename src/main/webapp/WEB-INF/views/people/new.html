@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление человека</title>
+    <!-- Подключение стилей Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Добавление человека</h1>
+
+    <form th:method="POST" th:action="@{/people}" th:object="${person}">
+        <div class="form-group">
+            <label for="name">Введите имя:</label>
+            <input type="text" class="form-control" th:field="*{name}" id="name"/>
+        </div>
+
+        <div class="form-group">
+            <label for="surname">Введите фамилию:</label>
+            <input type="text" class="form-control" th:field="*{surname}" id="surname"/>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Введите отчество:</label>
+            <input type="text" class="form-control" th:field="*{lastName}" id="lastName"/>
+        </div>
+
+        <div class="form-group">
+            <label for="birthDate">Введите дату рождения:</label>
+            <input type="date" class="form-control" th:field="*{birthDate}" id="birthDate"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">СОЗДАТЬ</button>
+    </form>
+</div>
+
+<!-- Подключение скриптов Bootstrap и jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
