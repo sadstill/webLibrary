@@ -1,0 +1,58 @@
+/* Общие стили для всех размеров экрана */
+body {
+    font-family: 'Noto Sans', sans-serif;
+    background: #f1ebe6;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-wrapper {
+    max-width: 500px;
+    width: 70%;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #1e3932;
+    text-align: center;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+input,
+button {
+    width: calc(100% - 27px); /* Учесть отступы */
+    padding: 12px;
+    border-radius: 6px;
+    border: 2px solid #ddd;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+button {
+    background: #006241;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+    margin-left: 13px;
+}
+
+button:hover {
+    background: #004a30;
+    transform: scale(1.1); /* Увеличение кнопки при наведении */
+    transition: background 0.3s ease, transform 0.3s ease; /* Плавные переходы */
+}

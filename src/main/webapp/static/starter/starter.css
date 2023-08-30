@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1ebe6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.link-button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 10px;
+    color: #fff;
+    font-size: 20px;
+    background-color: #006241;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.link-button:hover {
+    background-color: #004a30;
+}
+
+.tic-tac-toe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 2px;
+    margin-top: 30px;
+}
+
+.tic-tac-toe-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    background-color: #fff;
+    border: 2px solid #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tic-tac-toe-cell:hover {
+    background-color: #f2f2f2;
+}

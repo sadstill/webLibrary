@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Добавление человека</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/new/new.css">
+    <link rel="stylesheet" href="/static/people/new/new.css">
 
 </head>
 <body>
@@ -12,7 +12,7 @@
 <div class="center-container">
     <h1>ДОБАВЛЕНИЕ ЧЕЛОВЕКА</h1>
 
-    <form th:method="POST" th:action="@{/WEB-INF/views/people}" th:object="${person}">
+    <form th:method="POST" th:action="@{/people}" th:object="${person}">
         <div class="form-group">
             <label for="name">Введите имя:</label>
             <input type="text" class="form-control" th:field="*{name}" id="name"/>

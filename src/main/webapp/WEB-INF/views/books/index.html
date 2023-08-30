@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/books/index/index.css">
+
+</head>
+<body>
+<h1>СПИСОК КНИГ</h1>
+
+<div class="people">
+    <div th:each="book : ${books}" class="person">
+        <a th:href="@{/books/{id}(id=${book.getId()})}" class="name person-link">
+            "<span th:text="${book.getName()}"></span>"
+            <span th:text="${book.getAuthor()}"></span>
+        </a>
+        <span class="birthdate" th:text="${book.getBirthDate()}"></span>
+        <a th:href="@{/books/{id}/edit(id=${book.getId()})}" class="edit-button">Edit</a>
+    </div>
+</div>
+
+<div class="sort-buttons">
+    <button id="sortByName" class="sort-button">Сортировать по имени</button>
+    <button id="sortByDate" class="sort-button">Сортировать по дате книги</button>
+</div>
+
+<div class="add-button-container">
+    <a href="/books/new" class="add-button">Добавить книгу</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<script src="/people/index"></script>
+
+</body>
+</html>

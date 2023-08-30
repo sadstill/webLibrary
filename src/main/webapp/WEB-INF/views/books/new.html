@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление книги</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/people/new/new.css">
+
+</head>
+<body>
+
+<div class="center-container">
+    <h1>ДОБАВЛЕНИЕ КНИГИ</h1>
+
+    <form th:method="POST" th:action="@{/books}" th:object="${book}">
+        <div class="form-group">
+            <label for="name">Введите название книги:</label>
+            <input type="text" class="form-control" th:field="*{name}" id="name"/>
+        </div>
+
+        <div class="form-group">
+            <label for="author">Введите имя автора:</label>
+            <input type="text" class="form-control" th:field="*{author}" id="author"/>
+        </div>
+
+        <div class="form-group">
+            <label for="birthDate">Введите дату выхода произведения:</label>
+            <input type="text" class="form-control" th:field="*{birthDate}" id="birthDate"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">СОЗДАТЬ</button>
+    </form>
+</div>
+
+</body>
+</html>

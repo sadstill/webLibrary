@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Обновление книги</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/books/edit/edit.css">
+
+</head>
+<body>
+<div class="form-wrapper">
+    <form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+        <h1>РЕДАКТИРОВАНИЕ КНИГИ</h1>
+        <label for="name">Изменение названия книги:</label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <label for="author">Изменение автора книги:</label>
+        <input type="text" th:field="*{author}" id="author"/>
+        <label for="birthDate">Изменение даты выхода произведения:</label>
+        <input type="text" th:field="*{birthDate}" id="birthDate"/>
+        <button type="submit">Обновить</button>
+    </form>
+</div>
+
+<script src="/static/people/edit/edit.js"></script>
+
+</body>
+</html>
