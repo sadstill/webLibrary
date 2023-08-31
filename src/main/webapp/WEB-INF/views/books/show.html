@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+    <link rel="stylesheet" href="/static/books/show/show.css">
+
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <p th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getBirthDate()}">VALUE</p>
+
+        <div th:if="${owner}">
+            <p>Книга сейчас у: <span th:text="${owner.getName()}">Person name</span></p>
+            <form th:method="PATCH" th:action="@{/books/{id}/release(id=${book.getId()})}">
+                <button class="btn" type="submit">Освободить книгу</button>
+            </form>
+        </div>
+
+        <div th:if="${people}">
+            <p>Эта книга свободна. Кому назначить ее?</p>
+            <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">
+                <label for="person">Выберите человека</label>
+                <select th:object="${person}" th:field="*{id}" id="person">
+                    <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}"></option>
+                </select>
+                <button class="btn" type="submit">Назначить книгу</button>
+            </form>
+        </div>
+
+        <hr/>
+
+        <form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+            <button class="btn" type="submit">Редактировать</button>
+        </form>
+
+        <form th:method="DELETE" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+            <button class="btn" type="submit">Удалить</button>
+        </form>
+    </div>
+</div>
+
+<script src="/books/show/show.js"></script>
+
+</body>
+</html>

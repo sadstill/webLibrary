@@ -1,0 +1,63 @@
+body {
+    margin: 2rem;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.card {
+    padding: 2rem;
+    margin-top: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card p {
+    margin-bottom: 1rem;
+}
+.btn {
+    padding: 0.5rem 1rem;
+    background-color: #00704A;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: #005a3e;
+}
+
+.card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn {
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #005a3e;
+}
+
+.assign-form {
+    position: absolute;
+    top: 50px; /* Подставьте нужное значение вертикального смещения */
+    right: 0; /* Подставьте нужное значение горизонтального смещения */
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Гарантирует, что выпадающий список будет выше других элементов */
+    display: none; /* Изначально скрываем */
+}
+
+.assign-book:hover .assign-form {
+    display: block; /* При наведении на блок "Эта книга свободна" показываем список */
+}
